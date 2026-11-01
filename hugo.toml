@@ -1,0 +1,14 @@
+baseURL = "https://example.com/"
+title = "Homelab 2"
+locale = "en-gb"
+ignoreFiles = ['(^|/)_private(/|$)', '(^|/)\.obsidian(/|$)']
+disableKinds = ["taxonomy", "term"]
+
+[params]
+description = "Building a two-node homelab in public."
+
+[markup.goldmark.renderer]
+unsafe = false
+
+[markup.highlight]
+noClasses = false

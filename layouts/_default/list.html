@@ -1,0 +1,10 @@
+{{ define "main" }}
+<p class="crumb"><a href="/">Home</a></p>
+<h1>{{ .Title }}</h1>
+{{ .Content }}
+<ol class="posts">
+{{ range sort .RegularPages "File.BaseFileName" }}
+  <li><a href="{{ .RelPermalink }}"><strong>{{ .Title }}</strong>{{ with .Params.summary }}<span>{{ . }}</span>{{ end }}</a></li>
+{{ else }}<li class="soon">Coming soon.</li>{{ end }}
+</ol>
+{{ end }}

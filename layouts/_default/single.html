@@ -1,0 +1,14 @@
+{{ define "main" }}
+<p class="crumb"><a href="/">Home</a>{{ with .Parent }}{{ if not .IsHome }} / <a href="{{ .RelPermalink }}">{{ .Title }}</a>{{ end }}{{ end }}</p>
+<article>
+  <h1>{{ .Title }}</h1>
+  {{ with .Date }}{{ if not .IsZero }}<p class="meta">{{ .Format "2 Jan 2006" }}</p>{{ end }}{{ end }}
+  {{ if gt .WordCount 600 }}{{ with .TableOfContents }}<details class="toc"><summary>Contents</summary>{{ . }}</details>{{ end }}{{ end }}
+  {{ .Content }}
+</article>
+{{ $pages := sort .Parent.RegularPages "File.BaseFileName" }}
+<nav class="pager">
+  {{ with $pages.Prev . }}<a href="{{ .RelPermalink }}">← {{ .Title }}</a>{{ end }}
+  {{ with $pages.Next . }}<a class="next" href="{{ .RelPermalink }}">{{ .Title }} →</a>{{ end }}
+</nav>
+{{ end }}

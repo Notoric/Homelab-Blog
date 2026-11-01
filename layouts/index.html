@@ -1,0 +1,13 @@
+{{ define "main" }}
+<section class="hero"><h1>{{ .Title }}</h1>{{ .Content }}</section>
+<h2 class="label">Chapters</h2>
+<ol class="chapters">
+{{ range sort (where .Site.Sections "Type" "ne" "page") "File.Dir" }}
+  {{ if and (ne .Section "about") (not .Params.draft) }}
+  <li><a href="{{ .RelPermalink }}"><strong>{{ .Title }}</strong>
+    {{ with .Params.summary }}<span>{{ . }}</span>{{ end }}
+    <small>{{ len .RegularPages }} post{{ if ne (len .RegularPages) 1 }}s{{ end }}</small></a></li>
+  {{ end }}
+{{ end }}
+</ol>
+{{ end }}

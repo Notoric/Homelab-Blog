@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="{{ site.Language.Locale }}" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>{{ if .IsHome }}{{ site.Title }}{{ else }}{{ .Title }} · {{ site.Title }}{{ end }}</title>
+  <meta name="description" content="{{ with .Params.summary }}{{ . }}{{ else }}{{ site.Params.description }}{{ end }}">
+  <link rel="stylesheet" href="https://ndl.notoric.dev/ndl.css">
+  {{ $css := resources.Get "css/blog.css" | resources.Minify | resources.Fingerprint }}
+  <link rel="stylesheet" href="{{ $css.RelPermalink }}">
+  {{ range .AlternativeOutputFormats }}<link rel="{{ .Rel }}" type="{{ .MediaType.Type }}" href="{{ .Permalink }}">{{ end }}
+</head>
+<body>
+  <header class="top"><a class="brand" href="/">{{ site.Title }}</a>
+    <nav><a href="/about/">About</a><a href="/index.xml">RSS</a></nav></header>
+  <main>{{ block "main" . }}{{ end }}</main>
+  <footer class="foot">{{ site.Title }}</footer>
+</body>
+</html>

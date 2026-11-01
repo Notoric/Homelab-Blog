@@ -1,0 +1,9 @@
+public/
+resources/
+.hugo_build.lock
+content/_private/
+content/.obsidian/
+*.edtz
+*.sync-conflict-*
+.stfolder
+_tools/blocklist.txt
