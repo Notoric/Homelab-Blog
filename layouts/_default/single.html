@@ -1,14 +1,16 @@
 {{ define "main" }}
-<p class="crumb"><a href="/">Home</a>{{ with .Parent }}{{ if not .IsHome }} / <a href="{{ .RelPermalink }}">{{ .Title }}</a>{{ end }}{{ end }}</p>
+<p class="crumb"><a href="/">Home</a>{{ if eq .Section "chapters" }} / Chapter {{ substr .File.BaseFileName 0 2 | int }}{{ end }}</p>
 <article>
   <h1>{{ .Title }}</h1>
   {{ with .Date }}{{ if not .IsZero }}<p class="meta">{{ .Format "2 Jan 2006" }}</p>{{ end }}{{ end }}
-  {{ if gt .WordCount 600 }}{{ with .TableOfContents }}<details class="toc"><summary>Contents</summary>{{ . }}</details>{{ end }}{{ end }}
+  {{ with .TableOfContents }}{{ if gt (len (findRE "<li>" .)) 1 }}<details class="toc" open><summary>In this chapter</summary>{{ . }}</details>{{ end }}{{ end }}
   {{ .Content }}
 </article>
-{{ $pages := sort .Parent.RegularPages "File.BaseFileName" }}
+{{ if eq .Section "chapters" }}
+{{ $pages := sort (where site.RegularPages "Section" "chapters") "File.BaseFileName" }}
 <nav class="pager">
   {{ with $pages.Prev . }}<a href="{{ .RelPermalink }}">← {{ .Title }}</a>{{ end }}
   {{ with $pages.Next . }}<a class="next" href="{{ .RelPermalink }}">{{ .Title }} →</a>{{ end }}
 </nav>
+{{ end }}
 {{ end }}

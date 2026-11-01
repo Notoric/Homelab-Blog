@@ -1,7 +1,8 @@
 ---
 title: "What is this?"
+slug: what-is-this
 date: 2026-11-01
-summary: "Background, motivation, and why I'm writing it all down."
+summary: "Who I am, where I started, and why I'm building and blogging this."
 draft: true
 ---
 ## Who am I

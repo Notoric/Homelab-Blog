@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
-# usage: _tools/new-chapter.sh "Chapter title" ["summary"]  -> creates the next numbered chapter folder
+# usage: _tools/new-chapter.sh "Chapter title" ["summary"]  -> next numbered chapter file (a draft)
 set -e
-cd "$(dirname "$0")/../content"
-n=$(printf '%02d' $(( $(ls -d [0-9][0-9]-* | tail -1 | cut -c1-2 | sed 's/^0//') + 1 )))
+cd "$(dirname "$0")/../content/chapters"
+last=$(ls [0-9][0-9]-*.md 2>/dev/null | tail -1 | cut -c1-2 | sed 's/^0//')
+n=$(printf '%02d' $(( ${last:--1} + 1 )))
 slug=$(echo "$1" | tr 'A-Z' 'a-z' | tr -cs 'a-z0-9' '-' | sed 's/^-//;s/-$//')
-mkdir "$n-$slug"
-printf -- '---\ntitle: "%s"\nsummary: "%s"\n---\n' "$1" "${2:-}" > "$n-$slug/_index.md"
-echo "created content/$n-$slug"
+printf -- '---\ntitle: "%s"\nslug: %s\ndate: %s\nsummary: "%s"\ndraft: true\n---\n' "$1" "$slug" "$(date +%F)" "${2:-}" > "$n-$slug.md"
+echo "created content/chapters/$n-$slug.md"

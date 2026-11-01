@@ -12,3 +12,6 @@ unsafe = false
 
 [markup.highlight]
 noClasses = false
+
+[permalinks.page]
+chapters = "/:slug/"

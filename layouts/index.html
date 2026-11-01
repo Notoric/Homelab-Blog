@@ -2,12 +2,10 @@
 <section class="hero"><h1>{{ .Title }}</h1>{{ .Content }}</section>
 <h2 class="label">Chapters</h2>
 <ol class="chapters">
-{{ range sort (where .Site.Sections "Type" "ne" "page") "File.Dir" }}
-  {{ if and (ne .Section "about") (not .Params.draft) }}
+{{ range sort (where site.RegularPages "Section" "chapters") "File.BaseFileName" }}
   <li><a href="{{ .RelPermalink }}"><strong>{{ .Title }}</strong>
     {{ with .Params.summary }}<span>{{ . }}</span>{{ end }}
-    <small>{{ len .RegularPages }} post{{ if ne (len .RegularPages) 1 }}s{{ end }}</small></a></li>
-  {{ end }}
-{{ end }}
+    <small>Chapter {{ substr .File.BaseFileName 0 2 | int }}</small></a></li>
+{{ else }}<li class="soon">First chapter coming soon.</li>{{ end }}
 </ol>
 {{ end }}
