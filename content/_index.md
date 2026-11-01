@@ -1,4 +1,4 @@
 ---
 title: "Homelab 2"
 ---
-Building a two-node, highly available homelab from scratch, and writing down every step.
+Building my Homelab & documenting the process every step of the way.

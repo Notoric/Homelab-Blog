@@ -1,6 +1,7 @@
 {{ define "main" }}
 <p class="crumb"><a href="/">Home</a>{{ if eq .Section "chapters" }} / Chapter {{ substr .File.BaseFileName 0 2 | int }}{{ end }}</p>
 <article>
+  {{ if .Params.planned }}<div class="callout"><p class="callout-title">Coming soon</p>This chapter is planned but not written yet.</div>{{ end }}
   <h1>{{ .Title }}</h1>
   {{ with .Date }}{{ if not .IsZero }}<p class="meta">{{ .Format "2 Jan 2006" }}</p>{{ end }}{{ end }}
   {{ with .TableOfContents }}{{ if gt (len (findRE "<li>" .)) 1 }}<details class="toc" open><summary>In this chapter</summary>{{ . }}</details>{{ end }}{{ end }}

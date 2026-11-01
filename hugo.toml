@@ -1,4 +1,4 @@
-baseURL = "https://example.com/"
+baseURL = "https://blog.notoric.dev/"
 title = "Homelab 2"
 locale = "en-gb"
 ignoreFiles = ['(^|/)_private(/|$)', '(^|/)\.obsidian(/|$)']
